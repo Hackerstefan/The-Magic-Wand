@@ -26,10 +26,17 @@ https://github.com/user-attachments/assets/9900c0e7-90d5-4775-a31c-7cc3af49b593
 
 3. Next i tested it
 
+https://github.com/user-attachments/assets/3cf6a18c-cae7-4f43-8a4b-7c22fe5a22d8
+
 <h4>Testing Schematic</h4>
-<a href="https://lapse.hackclub.com/timelapse/kPnVVtXqYQ04">
+<a href="https:/
+/lapse.hackclub.com/timelapse/kPnVVtXqYQ04">
   <img src="https://img.shields.io/badge/▶_Watch_Timelapse-Testing_Schematic-ec3750?style=for-the-badge" alt="Testing Schematic">
 </a>
 
 4. Here is how it looks in the end.
 
+<img width="288" height="323" alt="Screenshot From 2026-08-24 14-14-35" src="https://github.com/user-attachments/assets/d9dd6cea-7e5b-4901-81e1-15598394ab4e" />
+
+5. Then i put all components on paper and drew the design.
+<img width="347" height="500" alt="magicwand" src="https://github.com/user-attachments/assets/118badd7-f647-4507-b95b-2edeef633ac6" />
