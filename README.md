@@ -7,13 +7,13 @@ It has on off buttons, a screen to see what you are controlling, one knob to cha
 It runs ESPHome and with open-source Home Assistant you can add devices of your choosing.
 
 1. First i searched for the components neeeded. I settled with:
--esp32-s3 zero
--oled 1.3 screen
--3.7V battery 
--ir sensor ky-005
--ec11 knob
--charging module tp4056
--5 buttons
+- esp32-s3 zero
+- oled 1.3 screen
+- 3.7V battery 
+- ir sensor ky-005
+- ec11 knob
+- charging module tp4056
+- 5 buttons
 
 2. I prepared my schematic inside wokwi , but since it doesnt have the esp32-s3 zero i used the one from xiao (xiao-esp32-c3)
 <h4>Designing Schematic</h4>
