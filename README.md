@@ -15,8 +15,8 @@ It runs ESPHome and with open-source Home Assistant you can add devices of your 
 - charging module tp4056
 - 5 buttons
 
-Here is link to the Wokwi Design
-https://wokwi.com/projects/410433244849526785
+Here is link to the Wokwi Design:
+https://wokwi.com/projects/473236577152141313
 
 2. I prepared my schematic inside wokwi , but since it doesnt have the esp32-s3 zero i used the one from xiao (xiao-esp32-c3)
 <h4>Designing Schematic</h4>
