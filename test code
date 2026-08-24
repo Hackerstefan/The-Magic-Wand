@@ -1,0 +1,114 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <IRremote.hpp>
+
+// Physical XIAO Pin Mapping
+#define PIN_ENC_CLK D1
+#define PIN_ENC_DT  D2
+#define PIN_ENC_SW  D3
+#define OLED_SDA    D4
+#define OLED_SCL    D5
+#define PIN_BTN4    D6
+#define PIN_BTN3    D7
+#define IR_SEND_PIN D8
+#define PIN_BTN1    D9
+#define PIN_BTN2    D10
+#define PIN_BTN5    D0
+
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
+
+int encoderPos = 0;
+int lastClkState;
+
+void updateScreen(String title, String statusLine) {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("--- HARDWARE TEST ---");
+  
+  display.setCursor(0, 18);
+  display.print("Event: ");
+  display.println(title);
+  
+  display.setCursor(0, 36);
+  display.print("Enc Pos: ");
+  display.println(encoderPos);
+  
+  display.setCursor(0, 50);
+  display.println(statusLine);
+  display.display();
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  // Initialize buttons with internal pullups
+  pinMode(PIN_BTN1, INPUT_PULLUP);
+  pinMode(PIN_BTN2, INPUT_PULLUP);
+  pinMode(PIN_BTN3, INPUT_PULLUP);
+  pinMode(PIN_BTN4, INPUT_PULLUP);
+  pinMode(PIN_BTN5, INPUT_PULLUP);
+  
+  pinMode(PIN_ENC_CLK, INPUT_PULLUP);
+  pinMode(PIN_ENC_DT, INPUT_PULLUP);
+  pinMode(PIN_ENC_SW, INPUT_PULLUP);
+  
+  lastClkState = digitalRead(PIN_ENC_CLK);
+
+  // Start Display
+  Wire.begin(OLED_SDA, OLED_SCL);
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  updateScreen("System Ready", "Press any button");
+
+  // Start IR Sender
+  IrSender.begin(IR_SEND_PIN);
+}
+
+void loop() {
+  // Test Push Buttons
+  if (digitalRead(PIN_BTN1) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x01, 0);
+    updateScreen("Button 1 Pressed", "IR Code: 0x01 Sent");
+    delay(200);
+  }
+  else if (digitalRead(PIN_BTN2) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x02, 0);
+    updateScreen("Button 2 Pressed", "IR Code: 0x02 Sent");
+    delay(200);
+  }
+  else if (digitalRead(PIN_BTN3) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x03, 0);
+    updateScreen("Button 3 Pressed", "IR Code: 0x03 Sent");
+    delay(200);
+  }
+  else if (digitalRead(PIN_BTN4) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x04, 0);
+    updateScreen("Button 4 Pressed", "IR Code: 0x04 Sent");
+    delay(200);
+  }
+  else if (digitalRead(PIN_BTN5) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x05, 0);
+    updateScreen("Button 5 Pressed", "IR Code: 0x05 Sent");
+    delay(200);
+  }
+  else if (digitalRead(PIN_ENC_SW) == LOW) {
+    IrSender.sendNEC(0x00FF, 0x06, 0);
+    updateScreen("Encoder Switch", "IR Code: 0x06 Sent");
+    delay(200);
+  }
+
+  // Test Rotary Encoder
+  int currentClkState = digitalRead(PIN_ENC_CLK);
+  if (currentClkState != lastClkState && currentClkState == LOW) {
+    if (digitalRead(PIN_ENC_DT) != currentClkState) {
+      encoderPos++;
+      updateScreen("Encoder CW (+)", "Rotated Right");
+    } else {
+      encoderPos--;
+      updateScreen("Encoder CCW (-)", "Rotated Left");
+    }
+  }
+  lastClkState = currentClkState;
+}
